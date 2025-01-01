@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Code Generator</title>
+    <style>
+        canvas {
+            border: 1px solid #333;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Custom Code Generator</h2>
+        <input type="text" id="inputText" placeholder="Voer tekst in...">
+        <button onclick="generateCode()">Genereer Code</button>
+        <button onclick="readCode()">Lees Code</button>
+        <br>
+        <canvas id="codeCanvas" width="300" height="300"></canvas>
+    </div>
+    <script src="custom-code.js"></script>
+</body>
+</html> 

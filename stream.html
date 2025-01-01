@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pjotters-Games Live Stream</title>
+    <style>
+        .stream-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        video {
+            width: 100%;
+            border-radius: 8px;
+            background-color: #2d2d2d;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="stream-container">
+        <h2>Live Stream</h2>
+        <div class="video-grid">
+            <video id="localVideo" autoplay playsinline muted></video>
+            <video id="remoteVideo" autoplay playsinline></video>
+        </div>
+        <div class="controls">
+            <button id="startStream">Start Stream</button>
+            <button id="stopStream">Stop Stream</button>
+        </div>
+    </div>
+    <script src="stream.js"></script>
+</body>
+</html> 
