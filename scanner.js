@@ -41,49 +41,51 @@ class PjottersScanner {
     }
 
     detectPattern(imageData) {
-        // Hier implementeren we de patroonherkenning
-        // Dit is een vereenvoudigd voorbeeld
         const data = imageData.data;
-        let pattern = '';
-
-        // Zoek naar specifieke kleurpatronen
+        const width = imageData.width;
+        const height = imageData.height;
+        
+        // Zoek naar de turquoise en paarse kleuren van het logo
+        let turquoiseCount = 0;
+        let purpleCount = 0;
+        
         for (let i = 0; i < data.length; i += 4) {
             const r = data[i];
             const g = data[i + 1];
             const b = data[i + 2];
             
-            // Zoek naar je specifieke kleurpatroon
-            if (this.isPatternColor(r, g, b)) {
-                pattern += '1';
+            // Check voor turquoise (ongeveer RGB: 45, 195, 188)
+            if (g > 180 && b > 180 && r < 60) {
+                turquoiseCount++;
+            }
+            
+            // Check voor paars (ongeveer RGB: 146, 84, 222)
+            if (r > 140 && g < 100 && b > 200) {
+                purpleCount++;
             }
         }
-
-        return this.decodePattern(pattern);
-    }
-
-    isPatternColor(r, g, b) {
-        // Pas dit aan voor jouw specifieke kleurpatroon
-        return (r > 200 && g < 50 && b > 200); // Voorbeeld voor paars
-    }
-
-    decodePattern(pattern) {
-        // Decodeer het patroon naar een URL
-        // Dit is waar je je eigen decoderingslogica implementeert
-        if (pattern.length > 100) { // Voorbeeld check
-            return 'https://pjotters-games.nl';
+        
+        // Als we genoeg pixels van beide kleuren vinden
+        const totalPixels = width * height;
+        const threshold = totalPixels * 0.05; // 5% van de pixels
+        
+        if (turquoiseCount > threshold && purpleCount > threshold) {
+            return 'https://quiz-nl.github.io/TestMODE/player.html';
         }
+        
         return null;
     }
 
     handleScan(url) {
-        this.scanning = false;
-        this.scanResult.style.display = 'block';
-        this.scanResult.textContent = 'Code gevonden! Doorsturen naar: ' + url;
-        
-        // Redirect na een korte vertraging
-        setTimeout(() => {
-            window.location.href = url;
-        }, 1000);
+        if (url === 'https://quiz-nl.github.io/TestMODE/player.html') {
+            this.scanning = false;
+            this.scanResult.style.display = 'block';
+            this.scanResult.textContent = 'Logo herkend! Je wordt doorgestuurd...';
+            
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1000);
+        }
     }
 }
 
